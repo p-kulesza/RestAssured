@@ -1,14 +1,21 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeAll;
 import org.testng.annotations.Test;
 
+import java.net.StandardSocketOptions;
+
+import static io.restassured.RestAssured.given;
+
 public class RestfulAPITest {
+    private static final String BASE_URL = "https://reqres.in/api";
+
+
     @Test
-    public void test_1(){
-        Response response = RestAssured.get("https://dummyapi.io/");
-        int statusCode = response.getStatusCode();
-        long responseTime = response.getTime();
-        System.out.println("Status code is: " + statusCode);
-        System.out.println("Response time is: " + responseTime);
+    public void get_users(){
+       Response response = RestAssured.get("https://reqres.in/api/users");
+        String body = response.getBody().asString();
+        System.out.println(body);
+
     }
 }
